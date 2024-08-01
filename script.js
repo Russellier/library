@@ -22,6 +22,15 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
+  const newBook = new Book(
+    title.value,
+    author.value,
+    pages.value,
+    read.checked
+  );
+
+  myLibrary.push(newBook);
+  console.log(myLibrary);
   // do stuff here
 }
 
@@ -51,15 +60,7 @@ openFormBtn.addEventListener('click', () => {
 //fix: submitting form does not clear form for next input
 addBookBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  const newBook = new Book(
-    title.value,
-    author.value,
-    pages.value,
-    read.checked
-  );
-
-  myLibrary.push(newBook);
-  console.log(myLibrary);
+  addBookToLibrary();
 });
 
 closeFormBtn.addEventListener('click', () => {
