@@ -30,12 +30,11 @@ function addBookToLibrary() {
   );
 
   myLibrary.push(newBook);
-  console.log(myLibrary);
-  // do stuff here
 }
 
 function displayBooks() {
   // iterate over myLibrary
+  myLibrary.forEach((book) => console.log(book));
   // display each book as a card
 }
 
@@ -57,12 +56,13 @@ openFormBtn.addEventListener('click', () => {
   dialogBox.showModal();
 });
 
-//fix: submitting form does not clear form for next input
 addBookBtn.addEventListener('click', (e) => {
   e.preventDefault();
   addBookToLibrary();
+  displayBooks();
+  form.reset();
 });
 
-closeFormBtn.addEventListener('click', () => {
-  dialogBox.close();
-});
+// closeFormBtn.addEventListener('click', () => {
+//   dialogBox.close();
+// });
