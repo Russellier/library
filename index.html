@@ -11,9 +11,21 @@
       <p>My Library</p>
     </div>
     <div class="main">
-      <button>+ Add Book</button>
+      <button class="open-form">+ Add Book</button>
       <div class="display-books">
         <p>You have no books in your library.</p>
+      </div>
+      <div class="from">
+        <label for="title" required>Title</label>
+        <input id="title" type="text" />
+        <label for="author" required>Author</label>
+        <input id="author" type="text" />
+        <label for="pages" required>Number of Pages</label>
+        <input id="pages" type="number" />
+        <label for="read">I have read this book</label>
+        <input id="read" type="checkbox" />
+        <button>Add Book</button>
+        <button class="close-form">Cancel</button>
       </div>
     </div>
     <script src="script.js"></script>
