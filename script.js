@@ -1,6 +1,9 @@
 'use strict';
 
 const myLibrary = [];
+const form = document.querySelector('.form');
+const openForm = document.querySelector('.open-form');
+const closeForm = document.querySelector('.close-form');
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -19,3 +22,11 @@ function addBookToLibrary() {
 function displayBooks() {
   // do stuff here
 }
+
+openForm.addEventListener('click', () => {
+  form.classList.remove('hidden');
+});
+
+closeForm.addEventListener('click', () => {
+  form.classList.add('hidden');
+});
