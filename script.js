@@ -1,6 +1,7 @@
 'use strict';
 
 const myLibrary = [];
+const dialogBox = document.querySelector('.form-container');
 const form = document.querySelector('.form');
 const openForm = document.querySelector('.open-form');
 const closeForm = document.querySelector('.close-form');
@@ -20,15 +21,16 @@ function addBookToLibrary() {
 }
 
 function displayBooks() {
-  // do stuff here
+  // iterate over myLibrary
+  // display each book as a card
 }
 
-if (myLibrary.length === 0) form.classList.remove('hidden');
+if (myLibrary.length === 0) dialogBox.showModal();
 
 openForm.addEventListener('click', () => {
-  form.classList.remove('hidden');
+  dialogBox.showModal();
 });
 
 closeForm.addEventListener('click', () => {
-  form.classList.add('hidden');
+  dialogBox.close();
 });

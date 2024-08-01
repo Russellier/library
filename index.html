@@ -15,18 +15,20 @@
       <div class="display-books">
         <p>You have no books in your library.</p>
       </div>
-      <div class="form hidden">
-        <label for="title" required>Title</label>
-        <input id="title" type="text" />
-        <label for="author" required>Author</label>
-        <input id="author" type="text" />
-        <label for="pages" required>Number of Pages</label>
-        <input id="pages" type="number" />
-        <label for="read">I have read this book</label>
-        <input id="read" type="checkbox" />
-        <button>Add to Library</button>
-        <button class="close-form">Cancel</button>
-      </div>
+      <dialog class="form-container">
+        <form method="dialog" class="form">
+          <label for="title" required>Title</label>
+          <input autofocus id="title" type="text" />
+          <label for="author" required>Author</label>
+          <input id="author" type="text" />
+          <label for="pages" min="1" required>Number of Pages</label>
+          <input id="pages" type="number" />
+          <label for="read">I have read this book</label>
+          <input id="read" type="checkbox" />
+          <button type="submit">Add to Library</button>
+          <button class="close-form">Cancel</button>
+        </form>
+      </dialog>
     </div>
     <script src="script.js"></script>
   </body>
