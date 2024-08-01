@@ -23,6 +23,8 @@ function displayBooks() {
   // do stuff here
 }
 
+if (myLibrary.length === 0) form.classList.remove('hidden');
+
 openForm.addEventListener('click', () => {
   form.classList.remove('hidden');
 });
