@@ -16,7 +16,7 @@
         <p>You have no books in your library.</p>
       </div>
       <dialog class="form-container">
-        <form method="dialog" class="form">
+        <form class="form">
           <label for="title" required>Title</label>
           <input autofocus id="title" type="text" />
           <label for="author" required>Author</label>
@@ -25,8 +25,8 @@
           <input id="pages" type="number" />
           <label for="read">I have read this book</label>
           <input id="read" type="checkbox" />
-          <button type="submit">Add to Library</button>
-          <button class="close-form">Cancel</button>
+          <button class="add-book" type="submit">Add to Library</button>
+          <button class="close-form" formmethod="dialog">Cancel</button>
         </form>
       </dialog>
     </div>

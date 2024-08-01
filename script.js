@@ -3,8 +3,9 @@
 const myLibrary = [];
 const dialogBox = document.querySelector('.form-container');
 const form = document.querySelector('.form');
-const openForm = document.querySelector('.open-form');
-const closeForm = document.querySelector('.close-form');
+const addBookBtn = document.querySelector('.add-book');
+const openFormBtn = document.querySelector('.open-form');
+// const closeFormBtn = document.querySelector('.close-form');
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -27,10 +28,27 @@ function displayBooks() {
 
 if (myLibrary.length === 0) dialogBox.showModal();
 
-openForm.addEventListener('click', () => {
+openFormBtn.addEventListener('click', () => {
   dialogBox.showModal();
 });
 
-closeForm.addEventListener('click', () => {
-  dialogBox.close();
+// addBookBtn.addEventLister('click', (e) => {
+//   e.preventDefault();
+//   dialogBox.close();
+// });
+
+// closeFormBtn.addEventListener('click', () => {
+//   dialogBox.close();
+// });
+
+dialogBox.addEventListener('click', (e) => {
+  const dialogDimensions = dialogBox.getBoundingClientRect();
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    dialogBox.close();
+  }
 });
