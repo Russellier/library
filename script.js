@@ -1,6 +1,7 @@
 'use strict';
 
 const myLibrary = [];
+const noBooks = document.querySelector('.no-books');
 const dialogBox = document.querySelector('.form-container');
 const form = document.querySelector('.form');
 const addBookBtn = document.querySelector('.add-book');
@@ -61,6 +62,7 @@ addBookBtn.addEventListener('click', (e) => {
   addBookToLibrary();
   displayBooks();
   form.reset();
+  if (noBooks) noBooks.remove();
 });
 
 // closeFormBtn.addEventListener('click', () => {
