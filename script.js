@@ -7,6 +7,7 @@ const form = document.querySelector('.form');
 const addBookBtn = document.querySelector('.add-book');
 const openFormBtn = document.querySelector('.open-form');
 const closeFormBtn = document.querySelector('.close-form');
+// const removeBtn = document.querySelector('.remove-btn');
 const title = document.querySelector('.title');
 const author = document.querySelector('.author');
 const pages = document.querySelector('.pages');
@@ -46,22 +47,30 @@ function displayBooks() {
   clearDisplay();
 
   // iterate over myLibrary
-  myLibrary.forEach((book) => {
+  myLibrary.forEach((book, i) => {
     // display each book as a card
     const newCard = document.createElement('div');
     const title = document.createElement('p');
     const author = document.createElement('p');
     const pages = document.createElement('p');
+    const removeBtn = document.createElement('button');
 
     newCard.classList.add('card');
     title.textContent = book.title;
     author.textContent = book.author;
     pages.textContent = book.pages;
+    removeBtn.textContent = 'Remove';
+    removeBtn.classList.add('remove-btn');
+    removeBtn.dataset.index = i;
 
-    newCard.append(title, author, pages);
+    removeBtn.addEventListener('click', (e) => {
+      removeBook(e);
+    });
+
+    newCard.append(title, author, pages, removeBtn);
     displayContainer.appendChild(newCard);
 
-    console.log(displayContainer);
+    // console.log(displayContainer);
   });
 
   // for (let i = 0; i <= myLibrary.length; i++) {
@@ -80,6 +89,12 @@ function displayBooks() {
 
   //   console.log(displayContainer);
   // }
+}
+
+function removeBook(e) {
+  let index = parseInt(e.target.dataset.index);
+  myLibrary.splice(index, 1);
+  displayBooks();
 }
 
 if (myLibrary.length === 0) dialogBox.showModal();
