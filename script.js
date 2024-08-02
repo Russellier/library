@@ -1,7 +1,7 @@
 'use strict';
 
 const myLibrary = [];
-const noBooks = document.querySelector('.no-books');
+const displayContainer = document.querySelector('.display-container');
 const dialogBox = document.querySelector('.form-container');
 const form = document.querySelector('.form');
 const addBookBtn = document.querySelector('.add-book');
@@ -33,10 +33,53 @@ function addBookToLibrary() {
   myLibrary.push(newBook);
 }
 
+function clearDisplay() {
+  let child = displayContainer.lastChild;
+  while (child) {
+    displayContainer.removeChild(child);
+    child = displayContainer.lastChild;
+  }
+}
+
+// Continue
 function displayBooks() {
+  clearDisplay();
+
   // iterate over myLibrary
-  myLibrary.forEach((book) => console.log(book));
-  // display each book as a card
+  myLibrary.forEach((book) => {
+    // display each book as a card
+    const newCard = document.createElement('div');
+    const title = document.createElement('p');
+    const author = document.createElement('p');
+    const pages = document.createElement('p');
+
+    newCard.classList.add('card');
+    title.textContent = book.title;
+    author.textContent = book.author;
+    pages.textContent = book.pages;
+
+    newCard.append(title, author, pages);
+    displayContainer.appendChild(newCard);
+
+    console.log(displayContainer);
+  });
+
+  // for (let i = 0; i <= myLibrary.length; i++) {
+  //   const newCard = document.createElement('div');
+  //   const title = document.createElement('p');
+  //   const author = document.createElement('p');
+  //   const pages = document.createElement('p');
+
+  //   newCard.classList.add('card');
+  //   title.textContent = myLibrary[i].title;
+  //   author.textContent = myLibrary[i].author;
+  //   pages.textContent = myLibrary[i].pages;
+
+  //   newCard.append(title, author, pages);
+  //   displayContainer.appendChild(newCard);
+
+  //   console.log(displayContainer);
+  // }
 }
 
 if (myLibrary.length === 0) dialogBox.showModal();
@@ -62,7 +105,6 @@ addBookBtn.addEventListener('click', (e) => {
   addBookToLibrary();
   displayBooks();
   form.reset();
-  if (noBooks) noBooks.remove();
 });
 
 // closeFormBtn.addEventListener('click', () => {
