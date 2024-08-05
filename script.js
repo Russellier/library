@@ -6,8 +6,7 @@ const dialogBox = document.querySelector('.form-container');
 const form = document.querySelector('.form');
 const addBookBtn = document.querySelector('.add-book');
 const openFormBtn = document.querySelector('.open-form');
-// const closeFormBtn = document.querySelector('.close-form');
-// const removeBtn = document.querySelector('.remove-btn');
+const closeFormBtn = document.querySelector('.close-form');
 const title = document.querySelector('.title');
 const author = document.querySelector('.author');
 const pages = document.querySelector('.pages');
@@ -53,7 +52,6 @@ function displayBooks() {
     const title = document.createElement('p');
     const author = document.createElement('p');
     const pages = document.createElement('p');
-    // const read = document.createElement('p');
     const removeBtn = document.createElement('button');
 
     const read = readOrNot(book.read, i);
@@ -66,7 +64,6 @@ function displayBooks() {
 
     title.textContent = `"${book.title}"`;
     author.textContent = `by ${book.author}`;
-    // read.textContent = book.read;
     pages.textContent = `${book.pages} pages`;
     removeBtn.textContent = 'Remove';
     removeBtn.classList.add('remove-btn');
@@ -79,8 +76,6 @@ function displayBooks() {
     bookDetails.append(title, author, pages, read);
     newCard.append(bookDetails, removeBtn);
     displayContainer.appendChild(newCard);
-
-    // console.log(displayContainer);
   });
 }
 
@@ -106,7 +101,6 @@ function readOrNot(read, i) {
     readBtn.textContent = 'Mark as read';
   }
 
-  // Continue: make read button functional
   readBtn.addEventListener('click', (e) => {
     if (read) myLibrary[i].read = false;
     else myLibrary[i].read = true;
@@ -137,12 +131,21 @@ openFormBtn.addEventListener('click', () => {
 
 addBookBtn.addEventListener('click', (e) => {
   e.preventDefault();
+  if (!title.value || !author.value || !pages.value) {
+    alert('Please fill out all required fields.');
+    return;
+  }
+  if (!pages.value < 0) {
+    alert('Invalid number of pages.');
+    return;
+  }
   addBookToLibrary();
   displayBooks();
   dialogBox.close();
   form.reset();
 });
 
-// closeFormBtn.addEventListener('click', () => {
-//   dialogBox.close();
-// });
+closeFormBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  dialogBox.close();
+});

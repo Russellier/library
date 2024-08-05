@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>My Library</title>
   </head>
@@ -20,23 +20,23 @@
       <dialog class="form-container">
         <form class="form">
           <div>
-            <label for="title" required>Title</label>
-            <input autofocus class="title" id="title" type="text" />
+            <label for="title">Title</label>
+            <input autofocus required class="title" id="title" type="text" />
           </div>
           <div>
-            <label for="author" required>Author</label>
-            <input class="author" id="author" type="text" />
+            <label for="author">Author</label>
+            <input required class="author" id="author" type="text" />
           </div>
           <div>
-            <label for="pages" min="1" required>Number of Pages</label>
-            <input class="pages" id="pages" type="number" />
+            <label for="pages" min="1">Number of Pages</label>
+            <input required class="pages" id="pages" min="0" type="number" />
           </div>
           <div>
             <input class="read" id="read" type="checkbox" />
             <label for="read">I have read this book</label>
           </div>
           <button class="add-book" type="submit">Add to Library</button>
-          <button class="close-form" formmethod="dialog">Cancel</button>
+          <button class="close-form">Cancel</button>
         </form>
       </dialog>
     </div>
