@@ -44,7 +44,29 @@ h6 {
   overflow-wrap: break-word;
 }
 
+:root {
+  --bg-clr-1: #f0f0f0;
+  --font-clr-1: #0f0f0f;
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(font-roboto/Roboto-Regular.ttf);
+}
+
+* {
+  background-color: var(--bg-clr-1);
+  color: var(--font-clr-1);
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 dialog {
+  border: 3px solid var(--font-clr-1);
+  border-radius: 10px;
   margin: auto;
 }
 
@@ -52,8 +74,66 @@ dialog::backdrop {
   background-color: rgba(255, 255, 255, 0.381);
 }
 
+.form {
+  display: grid;
+  gap: 10px;
+  padding: 1rem;
+}
+
+.form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.form > div:last-of-type {
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding: 0.5rem 0 1rem;
+}
+
+.form label {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.form input {
+  border-radius: 5px;
+  padding: 0 5px;
+  height: 2rem;
+  width: 15rem;
+}
+
+.form input.read {
+  height: 1.2rem;
+  width: 1.2rem;
+  padding-bottom: 5rem;
+}
+
+.form input.read:hover {
+  cursor: pointer;
+}
+
+.form > button {
+  justify-self: center;
+  height: 2rem;
+  width: 8rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
 .card {
   border: 2px solid darkred;
+}
+
+.read-container {
+  display: flex;
+}
+
+.read-btn {
+  text-decoration: underline;
+  border: none;
+  background-color: var(--bg-clr-1);
 }
 
 [src$='.svg'] {

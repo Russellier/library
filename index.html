@@ -17,14 +17,22 @@
       </div>
       <dialog class="form-container">
         <form class="form">
-          <label for="title" required>Title</label>
-          <input autofocus class="title" id="title" type="text" />
-          <label for="author" required>Author</label>
-          <input class="author" id="author" type="text" />
-          <label for="pages" min="1" required>Number of Pages</label>
-          <input class="pages" id="pages" type="number" />
-          <label for="read">I have read this book</label>
-          <input class="read" id="read" type="checkbox" />
+          <div>
+            <label for="title" required>Title</label>
+            <input autofocus class="title" id="title" type="text" />
+          </div>
+          <div>
+            <label for="author" required>Author</label>
+            <input class="author" id="author" type="text" />
+          </div>
+          <div>
+            <label for="pages" min="1" required>Number of Pages</label>
+            <input class="pages" id="pages" type="number" />
+          </div>
+          <div>
+            <input class="read" id="read" type="checkbox" />
+            <label for="read">I have read this book</label>
+          </div>
           <button class="add-book" type="submit">Add to Library</button>
           <button class="close-form" formmethod="dialog">Cancel</button>
         </form>

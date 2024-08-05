@@ -58,6 +58,10 @@ function displayBooks() {
     const read = readOrNot(book.read, i);
 
     newCard.classList.add('card');
+    title.classList.add('title');
+    author.classList.add('author');
+    pages.classList.add('pages');
+
     title.textContent = book.title;
     author.textContent = book.author;
     // read.textContent = book.read;
@@ -105,6 +109,7 @@ function readOrNot(read, i) {
   const icon = document.createElement('img');
   const readBtn = document.createElement('button');
 
+  readOrNotDiv.classList.add('read-container');
   readBtn.classList.add('read-btn');
 
   if (read) {
