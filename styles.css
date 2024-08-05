@@ -45,9 +45,13 @@ h6 {
 }
 
 :root {
-  --bg-clr-1: #f0f0f0;
+  --bg-clr-1: #d5bdaf;
+  --bg-clr-2: #e3d5ca;
   --font-clr-1: #0f0f0f;
-  --shadow-clr: #9b9b9b;
+  --font-clr-2: #292929;
+  --shadow-clr: #af9076;
+  --green-lgt: rgb(198, 255, 198);
+  --red-lgt: rgb(255, 184, 184);
 }
 
 @font-face {
@@ -56,7 +60,7 @@ h6 {
 }
 
 * {
-  background-color: var(--bg-clr-1);
+  background-color: var(--bg-clr-2);
   color: var(--font-clr-1);
   font-family: Roboto, Arial, Helvetica, sans-serif;
 }
@@ -81,7 +85,14 @@ body {
   font-weight: bold;
   color: var(--font-clr-1);
   -webkit-box-shadow: 1px 1px 15px 5px var(--shadow-clr);
-  box-shadow: 1px 1px 15px 5px var(--shadow-clr);
+  box-shadow: 0 1px 15px 5px var(--shadow-clr);
+}
+
+.header,
+.header *,
+.card,
+.card * {
+  background-color: var(--bg-clr-1);
 }
 
 .open-form-div {
@@ -92,10 +103,11 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   padding: 0.2rem 1rem;
-  border: 3px solid var(--font-clr-1);
+  border: none;
   border-radius: 5px;
-  -webkit-box-shadow: 1px 1px 15px 5px var(--shadow-clr);
-  box-shadow: 1px 1px 15px 5px var(--shadow-clr);
+  background-color: var(--green-lgt);
+  -webkit-box-shadow: 4px 4px 15px 5px var(--shadow-clr);
+  box-shadow: 4px 4px 15px 5px var(--shadow-clr);
 }
 
 dialog {
@@ -132,6 +144,7 @@ dialog::backdrop {
 }
 
 .form input {
+  background-color: var(--bg-clr-1);
   border-radius: 5px;
   padding: 0 5px;
   height: 2rem;
@@ -156,6 +169,14 @@ dialog::backdrop {
   font-weight: bold;
 }
 
+.form > .add-book {
+  background-color: var(--green-lgt);
+}
+
+.form > .close-form {
+  background-color: var(--red-lgt);
+}
+
 .display-container {
   padding: 2rem;
   display: grid;
@@ -168,11 +189,10 @@ dialog::backdrop {
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
-  border: 3px solid darkred;
   border-radius: 10px;
   padding: 1rem;
-  /* -webkit-box-shadow: 2px 2px 5px 10px #6e6e6e; */
-  box-shadow: 1px 1px 15px 5px var(--shadow-clr);
+  -webkit-box-shadow: 4px 4px 15px 5px var(--shadow-clr);
+  box-shadow: 4px 4px 15px 5px var(--shadow-clr);
 }
 
 .card .title {
@@ -183,6 +203,7 @@ dialog::backdrop {
 .card .author {
   font-size: 0.8rem;
   font-weight: bold;
+  color: var(--font-clr-2);
 }
 .card .pages {
   font-size: 1rem;
@@ -215,4 +236,6 @@ dialog::backdrop {
   width: 8rem;
   border-radius: 5px;
   font-weight: bold;
+  background-color: var(--red-lgt);
+  );
 }
