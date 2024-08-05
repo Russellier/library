@@ -130,15 +130,15 @@ openFormBtn.addEventListener('click', () => {
 });
 
 addBookBtn.addEventListener('click', (e) => {
-  e.preventDefault();
   if (!title.value || !author.value || !pages.value) {
     alert('Please fill out all required fields.');
     return;
   }
-  if (!pages.value < 0) {
+  if (pages.value < 0) {
     alert('Invalid number of pages.');
     return;
   }
+  e.preventDefault();
   addBookToLibrary();
   displayBooks();
   dialogBox.close();
