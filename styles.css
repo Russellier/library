@@ -55,3 +55,7 @@ dialog::backdrop {
 .card {
   border: 2px solid darkred;
 }
+
+[src$='.svg'] {
+  height: 1.5rem;
+}

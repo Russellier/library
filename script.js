@@ -6,7 +6,7 @@ const dialogBox = document.querySelector('.form-container');
 const form = document.querySelector('.form');
 const addBookBtn = document.querySelector('.add-book');
 const openFormBtn = document.querySelector('.open-form');
-const closeFormBtn = document.querySelector('.close-form');
+// const closeFormBtn = document.querySelector('.close-form');
 // const removeBtn = document.querySelector('.remove-btn');
 const title = document.querySelector('.title');
 const author = document.querySelector('.author');
@@ -42,7 +42,6 @@ function clearDisplay() {
   }
 }
 
-// Continue
 function displayBooks() {
   clearDisplay();
 
@@ -53,11 +52,15 @@ function displayBooks() {
     const title = document.createElement('p');
     const author = document.createElement('p');
     const pages = document.createElement('p');
+    // const read = document.createElement('p');
     const removeBtn = document.createElement('button');
+
+    const read = readOrNot(book.read, i);
 
     newCard.classList.add('card');
     title.textContent = book.title;
     author.textContent = book.author;
+    // read.textContent = book.read;
     pages.textContent = book.pages;
     removeBtn.textContent = 'Remove';
     removeBtn.classList.add('remove-btn');
@@ -67,7 +70,7 @@ function displayBooks() {
       removeBook(e);
     });
 
-    newCard.append(title, author, pages, removeBtn);
+    newCard.append(title, author, read, pages, removeBtn);
     displayContainer.appendChild(newCard);
 
     // console.log(displayContainer);
@@ -97,6 +100,32 @@ function removeBook(e) {
   displayBooks();
 }
 
+function readOrNot(read, i) {
+  const readOrNotDiv = document.createElement('div');
+  const icon = document.createElement('img');
+  const readBtn = document.createElement('button');
+
+  readBtn.classList.add('read-btn');
+
+  if (read) {
+    icon.src = 'icons/book-open-variant-outline.svg';
+    readBtn.textContent = 'Mark as unread';
+  } else {
+    icon.src = 'icons/book-outline.svg';
+    readBtn.textContent = 'Mark as read';
+  }
+
+  // Continue: make read button functional
+  readBtn.addEventListener('click', (e) => {
+    if (read) myLibrary[i].read = false;
+    else myLibrary[i].read = true;
+    displayBooks();
+  });
+
+  readOrNotDiv.append(icon, readBtn);
+  return readOrNotDiv;
+}
+
 if (myLibrary.length === 0) dialogBox.showModal();
 
 dialogBox.addEventListener('click', (e) => {
@@ -119,6 +148,7 @@ addBookBtn.addEventListener('click', (e) => {
   e.preventDefault();
   addBookToLibrary();
   displayBooks();
+  dialogBox.close();
   form.reset();
 });
 
