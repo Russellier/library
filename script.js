@@ -49,6 +49,7 @@ function displayBooks() {
   myLibrary.forEach((book, i) => {
     // display each book as a card
     const newCard = document.createElement('div');
+    const bookDetails = document.createElement('div');
     const title = document.createElement('p');
     const author = document.createElement('p');
     const pages = document.createElement('p');
@@ -58,14 +59,15 @@ function displayBooks() {
     const read = readOrNot(book.read, i);
 
     newCard.classList.add('card');
+    bookDetails.classList.add('book-details');
     title.classList.add('title');
     author.classList.add('author');
     pages.classList.add('pages');
 
-    title.textContent = book.title;
-    author.textContent = book.author;
+    title.textContent = `"${book.title}"`;
+    author.textContent = `by ${book.author}`;
     // read.textContent = book.read;
-    pages.textContent = book.pages;
+    pages.textContent = `${book.pages} pages`;
     removeBtn.textContent = 'Remove';
     removeBtn.classList.add('remove-btn');
     removeBtn.dataset.index = i;
@@ -74,28 +76,12 @@ function displayBooks() {
       removeBook(e);
     });
 
-    newCard.append(title, author, read, pages, removeBtn);
+    bookDetails.append(title, author, pages, read);
+    newCard.append(bookDetails, removeBtn);
     displayContainer.appendChild(newCard);
 
     // console.log(displayContainer);
   });
-
-  // for (let i = 0; i <= myLibrary.length; i++) {
-  //   const newCard = document.createElement('div');
-  //   const title = document.createElement('p');
-  //   const author = document.createElement('p');
-  //   const pages = document.createElement('p');
-
-  //   newCard.classList.add('card');
-  //   title.textContent = myLibrary[i].title;
-  //   author.textContent = myLibrary[i].author;
-  //   pages.textContent = myLibrary[i].pages;
-
-  //   newCard.append(title, author, pages);
-  //   displayContainer.appendChild(newCard);
-
-  //   console.log(displayContainer);
-  // }
 }
 
 function removeBook(e) {
