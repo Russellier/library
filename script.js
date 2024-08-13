@@ -1,17 +1,5 @@
 'use strict';
 
-// const myLibrary = [];
-// const displayContainer = document.querySelector('.display-container');
-// const dialogBox = document.querySelector('.form-container');
-// const form = document.querySelector('.form');
-// const addBookBtn = document.querySelector('.add-book');
-// const openFormBtn = document.querySelector('.open-form');
-// const closeFormBtn = document.querySelector('.close-form');
-// const title = document.querySelector('.title');
-// const author = document.querySelector('.author');
-// const pages = document.querySelector('.pages');
-// const read = document.querySelector('.read');
-
 class Book {
   static myLibrary = [];
   static displayContainer = document.querySelector('.display-container');
@@ -36,13 +24,13 @@ class Book {
   }
 
   addBookToLibrary(newBook) {
-    myLibrary.push(newBook);
+    Book.myLibrary.push(newBook);
     Book.displayBooks();
   }
 
   removeBook(e) {
     let index = parseInt(e.target.dataset.index);
-    myLibrary.splice(index, 1);
+    Book.myLibrary.splice(index, 1);
     Book.displayBooks();
   }
 
@@ -63,8 +51,8 @@ class Book {
     }
 
     readBtn.addEventListener('click', (e) => {
-      if (read) myLibrary[i].read = false;
-      else myLibrary[i].read = true;
+      if (read) Book.myLibrary[i].read = false;
+      else Book.myLibrary[i].read = true;
       Book.displayBooks();
     });
 
@@ -73,10 +61,10 @@ class Book {
   }
 
   static clearDisplay() {
-    let child = displayContainer.lastChild;
+    let child = Book.displayContainer.lastChild;
     while (child) {
-      displayContainer.removeChild(child);
-      child = displayContainer.lastChild;
+      Book.displayContainer.removeChild(child);
+      child = Book.displayContainer.lastChild;
     }
   }
 
@@ -84,7 +72,7 @@ class Book {
     Book.clearDisplay();
 
     // iterate over myLibrary
-    myLibrary.forEach((book, i) => {
+    Book.myLibrary.forEach((book, i) => {
       // display each book as a card
       const newCard = document.createElement('div');
       const bookDetails = document.createElement('div');
@@ -114,30 +102,30 @@ class Book {
 
       bookDetails.append(title, author, pages, read);
       newCard.append(bookDetails, removeBtn);
-      displayContainer.appendChild(newCard);
+      Book.displayContainer.appendChild(newCard);
     });
   }
 
   static initialize() {
-    if (myLibrary.length === 0) dialogBox.showModal();
+    if (Book.myLibrary.length === 0) Book.dialogBox.showModal();
 
-    dialogBox.addEventListener('click', (e) => {
-      const dialogDimensions = dialogBox.getBoundingClientRect();
+    Book.dialogBox.addEventListener('click', (e) => {
+      const dialogDimensions = Book.dialogBox.getBoundingClientRect();
       if (
         e.clientX < dialogDimensions.left ||
         e.clientX > dialogDimensions.right ||
         e.clientY < dialogDimensions.top ||
         e.clientY > dialogDimensions.bottom
       ) {
-        dialogBox.close();
+        Book.dialogBox.close();
       }
     });
 
-    openFormBtn.addEventListener('click', () => {
-      dialogBox.showModal();
+    Book.openFormBtn.addEventListener('click', () => {
+      Book.dialogBox.showModal();
     });
 
-    addBookBtn.addEventListener('click', (e) => {
+    Book.addBookBtn.addEventListener('click', (e) => {
       if (!title.value || !author.value || !pages.value) {
         alert('Please fill out all required fields.');
         return;
@@ -155,13 +143,13 @@ class Book {
       );
       newBook.addBookToLibrary(newBook);
       // Book.displayBooks();
-      dialogBox.close();
-      form.reset();
+      Book.dialogBox.close();
+      Book.form.reset();
     });
 
-    closeFormBtn.addEventListener('click', (e) => {
+    Book.closeFormBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      dialogBox.close();
+      Book.dialogBox.close();
     });
   }
 }
