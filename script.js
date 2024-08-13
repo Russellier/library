@@ -35,6 +35,7 @@ class Book {
 
   addBookToLibrary(newBook) {
     myLibrary.push(newBook);
+    Book.displayBooks();
   }
 
   removeBook(e) {
@@ -68,6 +69,52 @@ class Book {
     readOrNotDiv.append(icon, readBtn);
     return readOrNotDiv;
   }
+
+  static clearDisplay() {
+    let child = displayContainer.lastChild;
+    while (child) {
+      displayContainer.removeChild(child);
+      child = displayContainer.lastChild;
+    }
+  }
+
+  static displayBooks() {
+    Book.clearDisplay();
+
+    // iterate over myLibrary
+    myLibrary.forEach((book, i) => {
+      // display each book as a card
+      const newCard = document.createElement('div');
+      const bookDetails = document.createElement('div');
+      const title = document.createElement('p');
+      const author = document.createElement('p');
+      const pages = document.createElement('p');
+      const removeBtn = document.createElement('button');
+
+      const read = book.readOrNot(book.read, i);
+
+      newCard.classList.add('card');
+      bookDetails.classList.add('book-details');
+      title.classList.add('title');
+      author.classList.add('author');
+      pages.classList.add('pages');
+
+      title.textContent = `"${book.title}"`;
+      author.textContent = `by ${book.author}`;
+      pages.textContent = `${book.pages} pages`;
+      removeBtn.textContent = 'Remove';
+      removeBtn.classList.add('remove-btn');
+      removeBtn.dataset.index = i;
+
+      removeBtn.addEventListener('click', (e) => {
+        book.removeBook(e);
+      });
+
+      bookDetails.append(title, author, pages, read);
+      newCard.append(bookDetails, removeBtn);
+      displayContainer.appendChild(newCard);
+    });
+  }
 }
 
 // function addBookToLibrary() {
@@ -81,51 +128,51 @@ class Book {
 //   myLibrary.push(newBook);
 // }
 
-function clearDisplay() {
-  let child = displayContainer.lastChild;
-  while (child) {
-    displayContainer.removeChild(child);
-    child = displayContainer.lastChild;
-  }
-}
+// function clearDisplay() {
+//   let child = displayContainer.lastChild;
+//   while (child) {
+//     displayContainer.removeChild(child);
+//     child = displayContainer.lastChild;
+//   }
+// }
 
-function displayBooks() {
-  clearDisplay();
+// function displayBooks() {
+//   Book.clearDisplay();
 
-  // iterate over myLibrary
-  myLibrary.forEach((book, i) => {
-    // display each book as a card
-    const newCard = document.createElement('div');
-    const bookDetails = document.createElement('div');
-    const title = document.createElement('p');
-    const author = document.createElement('p');
-    const pages = document.createElement('p');
-    const removeBtn = document.createElement('button');
+//   // iterate over myLibrary
+//   myLibrary.forEach((book, i) => {
+//     // display each book as a card
+//     const newCard = document.createElement('div');
+//     const bookDetails = document.createElement('div');
+//     const title = document.createElement('p');
+//     const author = document.createElement('p');
+//     const pages = document.createElement('p');
+//     const removeBtn = document.createElement('button');
 
-    const read = book.readOrNot(book.read, i);
+//     const read = book.readOrNot(book.read, i);
 
-    newCard.classList.add('card');
-    bookDetails.classList.add('book-details');
-    title.classList.add('title');
-    author.classList.add('author');
-    pages.classList.add('pages');
+//     newCard.classList.add('card');
+//     bookDetails.classList.add('book-details');
+//     title.classList.add('title');
+//     author.classList.add('author');
+//     pages.classList.add('pages');
 
-    title.textContent = `"${book.title}"`;
-    author.textContent = `by ${book.author}`;
-    pages.textContent = `${book.pages} pages`;
-    removeBtn.textContent = 'Remove';
-    removeBtn.classList.add('remove-btn');
-    removeBtn.dataset.index = i;
+//     title.textContent = `"${book.title}"`;
+//     author.textContent = `by ${book.author}`;
+//     pages.textContent = `${book.pages} pages`;
+//     removeBtn.textContent = 'Remove';
+//     removeBtn.classList.add('remove-btn');
+//     removeBtn.dataset.index = i;
 
-    removeBtn.addEventListener('click', (e) => {
-      book.removeBook(e);
-    });
+//     removeBtn.addEventListener('click', (e) => {
+//       book.removeBook(e);
+//     });
 
-    bookDetails.append(title, author, pages, read);
-    newCard.append(bookDetails, removeBtn);
-    displayContainer.appendChild(newCard);
-  });
-}
+//     bookDetails.append(title, author, pages, read);
+//     newCard.append(bookDetails, removeBtn);
+//     displayContainer.appendChild(newCard);
+//   });
+// }
 
 // function removeBook(e) {
 //   let index = parseInt(e.target.dataset.index);
@@ -194,7 +241,7 @@ addBookBtn.addEventListener('click', (e) => {
     read.checked
   );
   newBook.addBookToLibrary(newBook);
-  displayBooks();
+  // Book.displayBooks();
   dialogBox.close();
   form.reset();
 });
