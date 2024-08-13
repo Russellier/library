@@ -12,16 +12,6 @@
 // const pages = document.querySelector('.pages');
 // const read = document.querySelector('.read');
 
-// function Book(title, author, pages, read) {
-//   this.title = title;
-//   this.author = author;
-//   this.pages = pages;
-//   this.read = read;
-//   this.info = function () {
-//     return `${title} by ${author}, ${pages} pages, ${read}`;
-//   };
-// }
-
 class Book {
   static myLibrary = [];
   static displayContainer = document.querySelector('.display-container');
@@ -175,5 +165,4 @@ class Book {
     });
   }
 }
-
 Book.initialize();
