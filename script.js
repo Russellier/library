@@ -12,26 +12,74 @@ const author = document.querySelector('.author');
 const pages = document.querySelector('.pages');
 const read = document.querySelector('.read');
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${read}`;
-  };
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+//   this.info = function () {
+//     return `${title} by ${author}, ${pages} pages, ${read}`;
+//   };
+// }
+
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.info = function () {
+      return `${title} by ${author}, ${pages} pages, ${read}`;
+    };
+  }
+
+  addBookToLibrary(newBook) {
+    myLibrary.push(newBook);
+  }
+
+  removeBook(e) {
+    let index = parseInt(e.target.dataset.index);
+    myLibrary.splice(index, 1);
+    displayBooks();
+  }
+
+  readOrNot(read, i) {
+    const readOrNotDiv = document.createElement('div');
+    const icon = document.createElement('img');
+    const readBtn = document.createElement('button');
+
+    readOrNotDiv.classList.add('read-container');
+    readBtn.classList.add('read-btn');
+
+    if (read) {
+      icon.src = 'icons/book-open-variant-outline.svg';
+      readBtn.textContent = 'Mark as unread';
+    } else {
+      icon.src = 'icons/book-outline.svg';
+      readBtn.textContent = 'Mark as read';
+    }
+
+    readBtn.addEventListener('click', (e) => {
+      if (read) myLibrary[i].read = false;
+      else myLibrary[i].read = true;
+      displayBooks();
+    });
+
+    readOrNotDiv.append(icon, readBtn);
+    return readOrNotDiv;
+  }
 }
 
-function addBookToLibrary() {
-  const newBook = new Book(
-    title.value,
-    author.value,
-    pages.value,
-    read.checked
-  );
+// function addBookToLibrary() {
+//   const newBook = new Book(
+//     title.value,
+//     author.value,
+//     pages.value,
+//     read.checked
+//   );
 
-  myLibrary.push(newBook);
-}
+//   myLibrary.push(newBook);
+// }
 
 function clearDisplay() {
   let child = displayContainer.lastChild;
@@ -54,7 +102,7 @@ function displayBooks() {
     const pages = document.createElement('p');
     const removeBtn = document.createElement('button');
 
-    const read = readOrNot(book.read, i);
+    const read = book.readOrNot(book.read, i);
 
     newCard.classList.add('card');
     bookDetails.classList.add('book-details');
@@ -70,7 +118,7 @@ function displayBooks() {
     removeBtn.dataset.index = i;
 
     removeBtn.addEventListener('click', (e) => {
-      removeBook(e);
+      book.removeBook(e);
     });
 
     bookDetails.append(title, author, pages, read);
@@ -79,37 +127,37 @@ function displayBooks() {
   });
 }
 
-function removeBook(e) {
-  let index = parseInt(e.target.dataset.index);
-  myLibrary.splice(index, 1);
-  displayBooks();
-}
+// function removeBook(e) {
+//   let index = parseInt(e.target.dataset.index);
+//   myLibrary.splice(index, 1);
+//   displayBooks();
+// }
 
-function readOrNot(read, i) {
-  const readOrNotDiv = document.createElement('div');
-  const icon = document.createElement('img');
-  const readBtn = document.createElement('button');
+// function readOrNot(read, i) {
+//   const readOrNotDiv = document.createElement('div');
+//   const icon = document.createElement('img');
+//   const readBtn = document.createElement('button');
 
-  readOrNotDiv.classList.add('read-container');
-  readBtn.classList.add('read-btn');
+//   readOrNotDiv.classList.add('read-container');
+//   readBtn.classList.add('read-btn');
 
-  if (read) {
-    icon.src = 'icons/book-open-variant-outline.svg';
-    readBtn.textContent = 'Mark as unread';
-  } else {
-    icon.src = 'icons/book-outline.svg';
-    readBtn.textContent = 'Mark as read';
-  }
+//   if (read) {
+//     icon.src = 'icons/book-open-variant-outline.svg';
+//     readBtn.textContent = 'Mark as unread';
+//   } else {
+//     icon.src = 'icons/book-outline.svg';
+//     readBtn.textContent = 'Mark as read';
+//   }
 
-  readBtn.addEventListener('click', (e) => {
-    if (read) myLibrary[i].read = false;
-    else myLibrary[i].read = true;
-    displayBooks();
-  });
+//   readBtn.addEventListener('click', (e) => {
+//     if (read) myLibrary[i].read = false;
+//     else myLibrary[i].read = true;
+//     displayBooks();
+//   });
 
-  readOrNotDiv.append(icon, readBtn);
-  return readOrNotDiv;
-}
+//   readOrNotDiv.append(icon, readBtn);
+//   return readOrNotDiv;
+// }
 
 if (myLibrary.length === 0) dialogBox.showModal();
 
@@ -139,7 +187,13 @@ addBookBtn.addEventListener('click', (e) => {
     return;
   }
   e.preventDefault();
-  addBookToLibrary();
+  const newBook = new Book(
+    title.value,
+    author.value,
+    pages.value,
+    read.checked
+  );
+  newBook.addBookToLibrary(newBook);
   displayBooks();
   dialogBox.close();
   form.reset();
